@@ -1,6 +1,5 @@
- const _ = require('lodash');
-
-
+const _ = require('lodash');
+const { DateTime } = require('luxon');
 
 const hello = () => "hello world!";
 
@@ -18,7 +17,8 @@ const newUser = (name, screenName) => {
 
 const postMessage = (user, msg) => {
   let updateUser = _.cloneDeep(user);
-  updateUser.timeline = [...updateUser.timeline, msg];
+  let timestamp = DateTime.fromISO(new Date().toISOString()).toString();
+  updateUser.timeline = [...updateUser.timeline, {msg, timestamp}];
 
   return updateUser;
 }

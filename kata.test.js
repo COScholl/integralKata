@@ -18,7 +18,7 @@ test("can create new user", () => {
 test("can update timeline", () => {
   let alice = newUser('Alice', 'theRealAlice');
   alice = postMessage(alice, "I love the weather today");
-  expect(alice.timeline).toContain('I love the weather today');
+  expect(alice.timeline[alice.timeline.length - 1].msg).toBe('I love the weather today');
 });
 
 const publishing = loadFeature('./__features__/publishing.feature');
@@ -30,11 +30,12 @@ defineFeature(publishing, (test) => {
       alice = postMessage(alice, "I love the weather today");
     });
     when('Alice views her timeline', () => {
-      console.log(alice.timeline);
+      console.log(alice.timeline); // in future render a component
     });
     then('Alice sees: "I love the weather today."', () => {
       alice = postMessage(alice, "I love the weather today");
-      expect(alice.timeline).toContain('I love the weather today');
+      // in the future, render a component before this step and test component contents
+      expect(alice.timeline[alice.timeline.length - 1].msg).toBe('I love the weather today');
     });
   });
 });
