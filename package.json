@@ -13,6 +13,7 @@
     "jest": "^26.0.1"
   },
   "devDependencies": {
+    "jest-cucumber": "^3.0.0",
     "prettier": "2.0.5"
   }
 }
