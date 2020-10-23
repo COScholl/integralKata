@@ -21,6 +21,10 @@ test("can update timeline", () => {
   expect(alice.timeline[alice.timeline.length - 1].msg).toBe('I love the weather today');
 });
 
+test("view timeline with time difference from timestamp to current time", () => {
+
+});
+
 const publishing = loadFeature('./__features__/publishing.feature');
 
 defineFeature(publishing, (test) => {
