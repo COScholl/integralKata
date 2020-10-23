@@ -1,5 +1,5 @@
 const { defineFeature, loadFeature } = require("jest-cucumber");
-const hello = require("./kata.js");
+const { hello, newUser, postMessage } = require("./kata.js");
 /*
   Feature: Publishing
   Feature: Timeline
@@ -9,18 +9,32 @@ test("the tests run", () => {
   expect(hello()).toBe("hello world!");
 });
 
+test("can create new user", () => {
+  const alice = newUser('Alice', 'theRealAlice');
+  expect(alice).toHaveProperty('name', 'Alice');
+  expect(alice).toHaveProperty('screenName', 'theRealAlice');
+});
+
+test("can update timeline", () => {
+  let alice = newUser('Alice', 'theRealAlice');
+  alice = postMessage(alice, "I love the weather today");
+  expect(alice.timeline).toContain('I love the weather today');
+});
+
 const publishing = loadFeature('./__features__/publishing.feature');
 
 defineFeature(publishing, (test) => {
+  let alice = newUser('Alice', 'theRealAlice');
   test('Alice publishes messages to her personal timeline.', ({ given, when, then }) => {
     given('Alice has published "I love the weather today."', () => {
-
+      alice = postMessage(alice, "I love the weather today");
     });
     when('Alice views her timeline', () => {
-
+      console.log(alice.timeline);
     });
     then('Alice sees: "I love the weather today."', () => {
-
+      alice = postMessage(alice, "I love the weather today");
+      expect(alice.timeline).toContain('I love the weather today');
     });
   });
 });

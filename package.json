@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "jest-cucumber": "^3.0.0",
